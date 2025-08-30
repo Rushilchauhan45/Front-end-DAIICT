@@ -49,7 +49,7 @@ const Dashboard = () => {
   ];
 
   const RoleSelector = () => (
-    <div className="flex space-x-2 mb-6">
+    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 mb-6">
       {[
         { key: 'government', label: 'Government', icon: <Building className="h-4 w-4" /> },
         { key: 'producer', label: 'Producer', icon: <Factory className="h-4 w-4" /> },
@@ -59,28 +59,28 @@ const Dashboard = () => {
           key={role.key}
           variant={activeRole === role.key ? "default" : "outline"}
           onClick={() => setActiveRole(role.key as any)}
-          className={activeRole === role.key ? 
-            "bg-neon-green text-background" : 
-            "border-neon-green text-neon-green hover:bg-neon-green hover:text-background"
-          }
+          className={`flex-1 sm:flex-initial ${activeRole === role.key ? 
+            "bg-primary-green text-primary-foreground" : 
+            "border-primary-green text-primary-green hover:bg-primary-green hover:text-primary-foreground"
+          }`}
         >
           {role.icon}
-          {role.label}
+          <span className="ml-2">{role.label}</span>
         </Button>
       ))}
     </div>
   );
 
   const GovernmentView = () => (
-    <div className="grid gap-6">
-      <div className="grid md:grid-cols-3 gap-6">
+    <div className="grid gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         <Card className="glass-card hover-glow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Allocated</CardTitle>
-            <DollarSign className="h-4 w-4 text-neon-green" />
+            <DollarSign className="h-4 w-4 text-primary-green" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-neon-green">$2.5B</div>
+            <div className="text-xl sm:text-2xl font-bold text-primary-green">$2.5B</div>
             <p className="text-xs text-muted-foreground">+12% from last month</p>
           </CardContent>
         </Card>
@@ -88,10 +88,10 @@ const Dashboard = () => {
         <Card className="glass-card hover-glow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Disbursed</CardTitle>
-            <TrendingUp className="h-4 w-4 text-neon-green" />
+            <TrendingUp className="h-4 w-4 text-primary-green" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-neon-green">$1.6B</div>
+            <div className="text-xl sm:text-2xl font-bold text-primary-green">$1.6B</div>
             <p className="text-xs text-muted-foreground">64% completion rate</p>
           </CardContent>
         </Card>
@@ -99,37 +99,40 @@ const Dashboard = () => {
         <Card className="glass-card hover-glow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Projects</CardTitle>
-            <Users className="h-4 w-4 text-neon-green" />
+            <Users className="h-4 w-4 text-primary-green" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-neon-green">147</div>
+            <div className="text-xl sm:text-2xl font-bold text-primary-green">147</div>
             <p className="text-xs text-muted-foreground">+23 new this month</p>
           </CardContent>
         </Card>
       </div>
       
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <Card className="glass-card">
           <CardHeader>
             <CardTitle className="text-foreground">Subsidy Allocation Trends</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={subsidyData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis dataKey="month" stroke="hsl(var(--muted-foreground))" />
-                <YAxis stroke="hsl(var(--muted-foreground))" />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'hsl(var(--card))', 
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: '8px'
-                  }} 
-                />
-                <Line type="monotone" dataKey="allocated" stroke="#3b82f6" strokeWidth={2} />
-                <Line type="monotone" dataKey="disbursed" stroke="#00ff88" strokeWidth={2} />
-              </LineChart>
-            </ResponsiveContainer>
+            <div className="h-[250px] sm:h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={subsidyData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis dataKey="month" stroke="hsl(var(--muted-foreground))" fontSize={12} />
+                  <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'hsl(var(--card))', 
+                      border: '1px solid hsl(var(--border))',
+                      borderRadius: '8px',
+                      fontSize: '12px'
+                    }} 
+                  />
+                  <Line type="monotone" dataKey="allocated" stroke="#3b82f6" strokeWidth={2} />
+                  <Line type="monotone" dataKey="disbursed" stroke="hsl(var(--primary-green))" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
         
@@ -138,24 +141,26 @@ const Dashboard = () => {
             <CardTitle className="text-foreground">Disbursement Status</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={pieData}
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={100}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                >
-                  {pieData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
+            <div className="h-[250px] sm:h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -163,15 +168,15 @@ const Dashboard = () => {
   );
 
   const ProducerView = () => (
-    <div className="grid gap-6">
+    <div className="grid gap-4 sm:gap-6">
       <Card className="glass-card">
         <CardHeader>
           <CardTitle className="text-foreground flex items-center space-x-2">
-            <Factory className="h-5 w-5 text-neon-green" />
-            <span>Project Milestone Tracker</span>
+            <Factory className="h-5 w-5 text-primary-green" />
+            <span className="text-sm sm:text-base">Project Milestone Tracker</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-4 sm:space-y-6">
           {milestones.map((milestone) => (
             <div key={milestone.id} className="space-y-2">
               <div className="flex items-center justify-between">
@@ -179,8 +184,8 @@ const Dashboard = () => {
                 <Badge 
                   variant={milestone.status === 'completed' ? 'default' : 'outline'}
                   className={milestone.status === 'completed' ? 
-                    'bg-neon-green text-background' : 
-                    'border-neon-green text-neon-green'
+                    'bg-primary-green text-primary-foreground' : 
+                    'border-primary-green text-primary-green'
                   }
                 >
                   {milestone.status === 'completed' && <CheckCircle className="h-3 w-3 mr-1" />}
@@ -195,13 +200,13 @@ const Dashboard = () => {
         </CardContent>
       </Card>
       
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <Card className="glass-card hover-glow">
           <CardHeader>
             <CardTitle className="text-sm font-medium">Next Milestone</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-lg font-bold text-neon-green">Initial Production</div>
+            <div className="text-base sm:text-lg font-bold text-primary-green">Initial Production</div>
             <p className="text-xs text-muted-foreground">Expected completion: Oct 2024</p>
             <p className="text-xs text-muted-foreground">Reward: $250K subsidy release</p>
           </CardContent>
@@ -212,7 +217,7 @@ const Dashboard = () => {
             <CardTitle className="text-sm font-medium">Total Earned</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-lg font-bold text-neon-green">$1.2M</div>
+            <div className="text-base sm:text-lg font-bold text-primary-green">$1.2M</div>
             <p className="text-xs text-muted-foreground">From completed milestones</p>
             <p className="text-xs text-muted-foreground">Remaining: $800K</p>
           </CardContent>
@@ -222,28 +227,28 @@ const Dashboard = () => {
   );
 
   const AuditorView = () => (
-    <div className="grid gap-6">
+    <div className="grid gap-4 sm:gap-6">
       <Card className="glass-card">
         <CardHeader>
           <CardTitle className="text-foreground flex items-center space-x-2">
-            <FileText className="h-5 w-5 text-neon-green" />
-            <span>Immutable Audit Logs</span>
+            <FileText className="h-5 w-5 text-primary-green" />
+            <span className="text-sm sm:text-base">Immutable Audit Logs</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {auditLogs.map((log) => (
-              <div key={log.id} className="flex items-center justify-between p-3 glass-card hover-glow">
-                <div className="space-y-1">
+              <div key={log.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 glass-card hover-glow space-y-2 sm:space-y-0">
+                <div className="space-y-1 flex-1">
                   <div className="text-sm font-medium text-foreground">{log.action}</div>
                   <div className="text-xs text-muted-foreground">{log.timestamp}</div>
-                  {log.amount && <div className="text-xs text-neon-green">{log.amount}</div>}
-                  {log.milestone && <div className="text-xs text-neon-green">{log.milestone}</div>}
-                  {log.project && <div className="text-xs text-neon-green">{log.project}</div>}
+                  {log.amount && <div className="text-xs text-primary-green">{log.amount}</div>}
+                  {log.milestone && <div className="text-xs text-primary-green">{log.milestone}</div>}
+                  {log.project && <div className="text-xs text-primary-green">{log.project}</div>}
                 </div>
-                <div className="text-right">
-                  <div className="text-xs text-muted-foreground font-mono">{log.txHash}</div>
-                  <Badge variant="outline" className="border-neon-green text-neon-green mt-1">
+                <div className="text-left sm:text-right">
+                  <div className="text-xs text-muted-foreground font-mono break-all sm:break-normal">{log.txHash}</div>
+                  <Badge variant="outline" className="border-primary-green text-primary-green mt-1">
                     Verified
                   </Badge>
                 </div>
@@ -256,8 +261,8 @@ const Dashboard = () => {
   );
 
   return (
-    <section id="dashboard" className="py-20">
-      <div className="container mx-auto px-6">
+    <section id="dashboard" className="py-12 sm:py-20">
+      <div className="container mx-auto px-4 sm:px-6">
         <h2 className="section-header">Multi-Role Dashboard</h2>
         
         <RoleSelector />

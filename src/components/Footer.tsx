@@ -15,15 +15,15 @@ const Footer = () => {
         }} />
       </div>
       
-      <div className="container mx-auto px-6 py-16 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 relative z-10">
         {/* Newsletter Section */}
-        <div className="mb-16">
+        <div className="mb-12 sm:mb-16">
           <Card className="simple-card bg-surface-elevated/50 border-border/30">
-            <div className="p-8 text-center">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">
+            <div className="p-6 sm:p-8 text-center">
+              <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-4">
                 Stay Updated with Hydrochain
               </h3>
-              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base text-muted-foreground mb-6 max-w-2xl mx-auto">
                 Get the latest updates on green hydrogen subsidies, blockchain innovations, and platform developments.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
@@ -32,7 +32,7 @@ const Footer = () => {
                   placeholder="Enter your email address"
                   className="bg-input border-border focus:border-primary-green flex-1"
                 />
-                <Button className="btn-primary">
+                <Button className="btn-primary w-full sm:w-auto">
                   Subscribe
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -42,12 +42,12 @@ const Footer = () => {
         </div>
 
         {/* Main Footer Content */}
-        <div className="grid lg:grid-cols-5 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
           {/* Brand & Description */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="logo-container">
-              <div className="logo-icon">
-                <Droplets className="h-5 w-5" />
+          <div className="sm:col-span-2 lg:col-span-2 space-y-4 sm:space-y-6">
+            <div className="flex items-center space-x-2">
+              <div className="p-2 rounded-lg bg-primary-green/10">
+                <Droplets className="h-5 w-5 sm:h-6 sm:w-6 text-primary-green" />
               </div>
               <span className="logo-text">
                 Hydrochain

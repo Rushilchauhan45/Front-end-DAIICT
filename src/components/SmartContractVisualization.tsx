@@ -116,8 +116,8 @@ const SmartContractVisualization = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'bg-neon-green text-background';
-      case 'in-progress': return 'bg-cyber-blue text-background';
+      case 'completed': return 'bg-primary-green text-primary-foreground';
+      case 'in-progress': return 'bg-blue-500 text-white';
       case 'pending': return 'border-muted-foreground text-muted-foreground';
       default: return 'border-muted-foreground text-muted-foreground';
     }
@@ -133,62 +133,62 @@ const SmartContractVisualization = () => {
   };
 
   return (
-    <section id="smart-contracts" className="py-20">
-      <div className="container mx-auto px-6">
+    <section id="smart-contracts" className="py-12 sm:py-20">
+      <div className="container mx-auto px-4 sm:px-6">
         <h2 className="section-header">Smart Contract Visualization</h2>
         
         {/* Contract Selector */}
-        <div className="flex flex-wrap gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-6 sm:mb-8">
           {contracts.map((contract, index) => (
             <Button
               key={contract.id}
               variant={selectedContract === index ? "default" : "outline"}
               onClick={() => setSelectedContract(index)}
-              className={selectedContract === index ? 
-                "bg-neon-green text-background" : 
-                "border-neon-green text-neon-green hover:bg-neon-green hover:text-background"
-              }
+              className={`w-full sm:w-auto ${selectedContract === index ? 
+                "bg-primary-green text-primary-foreground" : 
+                "border-primary-green text-primary-green hover:bg-primary-green hover:text-primary-foreground"
+              }`}
             >
               {contract.name}
             </Button>
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Contract Overview */}
           <Card className="glass-card hover-glow">
             <CardHeader>
               <CardTitle className="text-foreground flex items-center space-x-2">
-                <Shield className="h-5 w-5 text-neon-green" />
-                <span>Contract Details</span>
+                <Shield className="h-5 w-5 text-primary-green" />
+                <span className="text-sm sm:text-base">Contract Details</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
                 <label className="text-sm text-muted-foreground">Contract Name</label>
-                <div className="text-foreground font-medium">{currentContract.name}</div>
+                <div className="text-foreground font-medium text-sm sm:text-base">{currentContract.name}</div>
               </div>
               
               <div>
                 <label className="text-sm text-muted-foreground">Address</label>
-                <div className="text-xs font-mono text-neon-green flex items-center space-x-1">
-                  <Hash className="h-3 w-3" />
+                <div className="text-xs font-mono text-primary-green flex items-center space-x-1 break-all">
+                  <Hash className="h-3 w-3 flex-shrink-0" />
                   <span>{currentContract.address}</span>
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm text-muted-foreground">Total Subsidy</label>
-                  <div className="text-lg font-bold text-neon-green">{currentContract.totalSubsidy}</div>
+                  <div className="text-base sm:text-lg font-bold text-primary-green">{currentContract.totalSubsidy}</div>
                 </div>
                 <div>
                   <label className="text-sm text-muted-foreground">Released</label>
-                  <div className="text-lg font-bold text-neon-green">{currentContract.releasedAmount}</div>
+                  <div className="text-base sm:text-lg font-bold text-primary-green">{currentContract.releasedAmount}</div>
                 </div>
               </div>
               
-              <Badge className="w-full justify-center bg-neon-green text-background">
+              <Badge className="w-full justify-center bg-primary-green text-primary-foreground">
                 <Zap className="h-3 w-3 mr-1" />
                 {currentContract.status}
               </Badge>

@@ -56,7 +56,7 @@ const Navigation = () => {
   const [errors, setErrors] = React.useState<FormErrors>({});
 
   const validatePassword = (password) => {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{6,}$/;
+    const passwordRegex = /^(?=.[A-Z])(?=.[!@#$%^&])(?=.[0-9]).{6,}$/;
     return passwordRegex.test(password);
   };
 

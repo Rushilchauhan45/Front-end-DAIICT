@@ -15,28 +15,28 @@ import {
 const ImpactSection = () => {
   const impactMetrics = [
     {
-      icon: <Shield className="h-8 w-8" />,
+      icon: <Shield className="h-6 w-6 sm:h-8 sm:w-8" />,
       title: "Transparency",
       description: "100% transparent subsidy allocation and disbursement",
       metric: "99.9%",
       label: "Audit Success Rate"
     },
     {
-      icon: <Clock className="h-8 w-8" />,
+      icon: <Clock className="h-6 w-6 sm:h-8 sm:w-8" />,
       title: "Speed",
       description: "Automated milestone verification and instant payments",
       metric: "10x",
       label: "Faster Processing"
     },
     {
-      icon: <Lock className="h-8 w-8" />,
+      icon: <Lock className="h-6 w-6 sm:h-8 sm:w-8" />,
       title: "Fraud Prevention",
       description: "Immutable blockchain records prevent manipulation",
       metric: "$0",
       label: "Fraudulent Claims"
     },
     {
-      icon: <Leaf className="h-8 w-8" />,
+      icon: <Leaf className="h-6 w-6 sm:h-8 sm:w-8" />,
       title: "Green Hydrogen Growth",
       description: "Accelerating clean energy transition worldwide",
       metric: "147",
@@ -45,29 +45,29 @@ const ImpactSection = () => {
   ];
 
   const globalStats = [
-    { label: "Countries Using Platform", value: "12", icon: <Globe className="h-5 w-5" /> },
-    { label: "Carbon Emissions Reduced", value: "2.3M tons", icon: <Leaf className="h-5 w-5" /> },
-    { label: "Jobs Created", value: "8,500+", icon: <Users className="h-5 w-5" /> },
-    { label: "Energy Generated", value: "1.2 TWh", icon: <Zap className="h-5 w-5" /> }
+    { label: "Countries Using Platform", value: "12", icon: <Globe className="h-4 w-4 sm:h-5 sm:w-5" /> },
+    { label: "Carbon Emissions Reduced", value: "2.3M tons", icon: <Leaf className="h-4 w-4 sm:h-5 sm:w-5" /> },
+    { label: "Jobs Created", value: "8,500+", icon: <Users className="h-4 w-4 sm:h-5 sm:w-5" /> },
+    { label: "Energy Generated", value: "1.2 TWh", icon: <Zap className="h-4 w-4 sm:h-5 sm:w-5" /> }
   ];
 
   return (
-    <section id="impact" className="py-20">
-      <div className="container mx-auto px-6">
+    <section id="impact" className="py-12 sm:py-20">
+      <div className="container mx-auto px-4 sm:px-6">
         <h2 className="section-header">Platform Impact</h2>
         
         {/* Main Impact Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {impactMetrics.map((item, index) => (
             <Card key={index} className="glass-card hover-glow group">
-              <CardContent className="p-6 text-center">
-                <div className="text-neon-green mb-4 flex justify-center group-hover:animate-pulse">
+              <CardContent className="p-4 sm:p-6 text-center">
+                <div className="text-primary-green mb-3 sm:mb-4 flex justify-center group-hover:animate-pulse">
                   {item.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
+                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">{item.title}</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">{item.description}</p>
                 <div className="space-y-1">
-                  <div className="text-2xl font-bold text-neon-green">{item.metric}</div>
+                  <div className="text-xl sm:text-2xl font-bold text-primary-green">{item.metric}</div>
                   <div className="text-xs text-muted-foreground">{item.label}</div>
                 </div>
               </CardContent>
@@ -76,19 +76,19 @@ const ImpactSection = () => {
         </div>
 
         {/* Global Impact Stats */}
-        <Card className="glass-card mb-12">
+        <Card className="glass-card mb-8 sm:mb-12">
           <CardHeader>
-            <CardTitle className="text-foreground text-center">Global Impact Statistics</CardTitle>
+            <CardTitle className="text-foreground text-center text-base sm:text-lg">Global Impact Statistics</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               {globalStats.map((stat, index) => (
-                <div key={index} className="text-center p-4 glass-card hover-glow">
-                  <div className="text-neon-green mb-2 flex justify-center">
+                <div key={index} className="text-center p-3 sm:p-4 glass-card hover-glow">
+                  <div className="text-primary-green mb-2 flex justify-center">
                     {stat.icon}
                   </div>
-                  <div className="text-2xl font-bold text-neon-green mb-1">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div className="text-lg sm:text-2xl font-bold text-primary-green mb-1">{stat.value}</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -96,7 +96,7 @@ const ImpactSection = () => {
         </Card>
 
         {/* Benefits Grid */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           <Card className="glass-card hover-glow">
             <CardHeader>
               <CardTitle className="text-foreground flex items-center space-x-2">

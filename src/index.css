@@ -282,4 +282,132 @@
   .hover-scale:hover {
     transform: scale(1.02);
   }
+
+  /* Responsive Utilities */
+  .mobile-only {
+    @apply block sm:hidden;
+  }
+
+  .tablet-up {
+    @apply hidden sm:block;
+  }
+
+  .desktop-only {
+    @apply hidden lg:block;
+  }
+
+  /* Mobile Navigation Improvements */
+  @media (max-width: 640px) {
+    .nav-link {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+    }
+
+    .main-title {
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    .section-header {
+      font-size: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .simple-card {
+      padding: 1rem;
+    }
+
+    .glass-card {
+      backdrop-blur: 8px;
+    }
+
+    /* Fix hero section positioning on mobile */
+    #home {
+      padding-top: 5rem !important;
+      min-height: calc(100vh - 4rem);
+    }
+  }
+
+  /* Tablet adjustments */
+  @media (min-width: 641px) and (max-width: 1023px) {
+    #home {
+      padding-top: 6rem !important;
+    }
+  }
+
+  /* Desktop adjustments */
+  @media (min-width: 1024px) {
+    #home {
+      padding-top: 5rem !important;
+    }
+  }
+
+  /* Touch targets for mobile */
+  @media (max-width: 768px) {
+    button, a[role="button"], [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    .hover-lift:active {
+      transform: translateY(-1px);
+    }
+
+    .hover-scale:active {
+      transform: scale(1.01);
+    }
+
+    /* Modal/Dialog responsive fixes */
+    [data-radix-dialog-content] {
+      max-height: 90vh !important;
+      overflow-y: auto !important;
+      margin: 1rem !important;
+    }
+
+    [data-radix-sheet-content] {
+      max-height: 100vh !important;
+      overflow-y: auto !important;
+    }
+  }
+
+  /* Improved text readability on mobile */
+  @media (max-width: 640px) {
+    body {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-xs {
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Container responsive adjustments */
+  .container {
+    @apply w-full max-w-7xl mx-auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
 }
